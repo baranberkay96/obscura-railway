@@ -1,5 +1,7 @@
 # Deploy and Host Obscura with Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/obscura-headless-browser-for-ai-agents-c?referralCode=20H68q)
+
 Obscura is an open-source headless browser for AI agents and web scraping, written in Rust. It runs real JavaScript in V8, speaks the Chrome DevTools Protocol (CDP), and works with Playwright and Puppeteer like a remote Chrome. It also renders screenshots and PDFs itself, without Chromium. This template runs Obscura 0.2.6 always on, behind a token, with optional stealth mode.
 
 ## About Hosting Obscura
