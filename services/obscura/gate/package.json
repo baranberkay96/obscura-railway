@@ -1,0 +1,17 @@
+{
+  "name": "obscura-gate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Token gate, CDP discovery rewriter and process supervisor in front of the Obscura headless browser (Railway community template).",
+  "type": "module",
+  "main": "src/main.js",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test \"test/*.test.js\"",
+    "coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "selftest": "node src/selftest.js"
+  }
+}
