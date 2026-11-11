@@ -69,7 +69,7 @@ Other CDP tools: pass the same `wss://` URL. Prefer it over the `https://` form 
 
 **Private networks.** `OBSCURA_BLOCK_PRIVATE_NETWORKS=true` (default) keeps Obscura's built-in guard on: pages cannot reach private, loopback, link-local or unique-local addresses, including `*.railway.internal` and cloud metadata. Set it to `false` only to browse your own internal services.
 
-**Scaling and cost.** Keep one replica: each replica is a separate browser. For more throughput raise `OBSCURA_WORKERS`, which spreads connections over several Obscura processes, and give the service more CPU and memory.
+**Scaling and cost.** Keep one replica: each replica is a separate browser. For more throughput raise `OBSCURA_WORKERS`, which spreads connections over several Obscura processes, and give the service more CPU and memory. Measured on Railway: about 0.11 GB of RAM idle (Obscura plus the gate) and at most 0.33 GB with 10 parallel connections loading Wikipedia, Hacker News and example.com, also under a 0.5 GB limit with stealth on. So every plan works, including Free. Responses sent over the public domain count as egress.
 
 **Persistence.** None: cookies and site storage live in each browser context and reset when Obscura restarts. Log in from your script or set cookies per run.
 

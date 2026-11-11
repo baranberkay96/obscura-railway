@@ -20,7 +20,7 @@ Two market templates exist (checked 2026-11-11):
 
 This package differs as follows:
 
-- Prebuilt, checksum-pinned `-stealth` release archive (rendering plus stealth transport): builds in about a minute, never compiles V8, and stealth is one variable away.
+- Prebuilt, checksum-pinned `-stealth` release archive (rendering plus stealth transport): no compile step, never compiles V8, and stealth is one variable away.
 - Public HTTPS domain with a gate in front: Browserless-style `wss://{domain}?token=...`, Bearer and Basic auth, discovery rewritten to `wss://{domain}/devtools/...?token=...`, Origin check, session limit, idle and lifetime timeouts.
 - Obscura stays on 127.0.0.1 and gets a random internal token that never leaves the container, so the public token can be rotated and is never forwarded.
 - Private-network guard on by default, as upstream, with one variable to turn it off.
@@ -104,7 +104,15 @@ Not in the template but supported: `OBSCURA_ALLOWED_ORIGINS`, `OBSCURA_HTTP_TIME
 
 ## Resource profile
 
-Measured on the first deploy test (to be filled in).
+Measured on Railway (2026-11-11, test project, raw CDP client):
+
+| State | RAM | CPU |
+|---|---|---|
+| Idle (gate + Obscura, 1 worker) | 0.11 GB | ~0 |
+| 10 parallel connections (Wikipedia, Hacker News, example.com) | 0.33 GB max | 0.24 vCPU max |
+| Same with `OBSCURA_STEALTH=true` and a 0.5 GB limit (Free plan) | under the limit, 10/10 succeeded, 0 restarts | — |
+
+Estimated cost at Railway prices: about $1–2/month idle; $3–8/month for an agent working a few hours a day. Minimum plan: Free (0.5 GB) works.
 
 ## Verification checklist
 
@@ -121,3 +129,4 @@ Measured on the first deploy test (to be filled in).
 
 - Obscura is a young engine; site compatibility differs from Chromium (documented in the README).
 - `OBSCURA_WORKERS` > 1 was checked in the source, not on Railway.
+- Tested with a raw CDP client (Target, Page, Runtime, captureScreenshot, printToPDF, LP.getMarkdown); Playwright and Puppeteer client libraries were not run against the deployment.
